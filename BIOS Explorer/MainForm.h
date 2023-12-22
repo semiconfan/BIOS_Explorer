@@ -55,7 +55,9 @@ namespace BIOSExplorer {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 261);
+			this->ClientSize = System::Drawing::Size(484, 361);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->Text = L"BIOS Explorer";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
@@ -67,7 +69,10 @@ namespace BIOSExplorer {
 		BiosInfoOutput bInfOut;
 
 		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
-			MessageBox::Show(bInfOut.GetOutput(), L"Інформація про BIOS",
+			MessageBox::Show(bInfOut.ConnectToWMI(), L"Підключення",
+				MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+			MessageBox::Show(bInfOut.GetBiosCharacteristics(), L"Тест",
 				MessageBoxButtons::OK, MessageBoxIcon::Information);
 		}
 	};

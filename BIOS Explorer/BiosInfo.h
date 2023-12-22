@@ -46,16 +46,27 @@ private:
     // Рядок, який потрібен для зберігання результатів запитів до WMI (С++ формат)
     std::wstring output;
 
+    // Інформація про BIOS:
+    std::wstring caption;               // Опис
+    std::wstring biosVersion;           // Версія
+    std::wstring manufacturer;          // Виробник
+    std::wstring releaseDate;           // Дата випуску
+    std::wstring SMBIOSVersion;         // Інформація про SMBIOS версію
+
+    // Змінні, які потрібні для зберігання результатів запитів до WMI
+    UINT32* pCharactDat;                // Масив характеристик BIOS
+
     // Методи для взаємодії з WMI
     BOOL ConnectToWMI();
-    BOOL GetTestData();
+    BOOL GetBiosCharacteristics();
     std::wstring GetOutput();
 };
 
 ref class BiosInfoOutput
 {
 public:
-    String^ GetOutput();
+    String^ ConnectToWMI();
+    String^ GetBiosCharacteristics();
 };
 
 #endif // BIOSINFO_H

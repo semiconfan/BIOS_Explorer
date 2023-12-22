@@ -1,5 +1,7 @@
 #include "BiosInfo.h"
 
+BiosInfo bInf;
+
 BOOL BiosInfo::ConnectToWMI()
 {
     // Крок 1:***************************************************
@@ -122,8 +124,11 @@ BOOL BiosInfo::ConnectToWMI()
     return TRUE;
 }
 
-BOOL BiosInfo::GetTestData()
+BOOL BiosInfo::GetBiosCharacteristics()
 {
+    // Крок 6: -------------------------------------------------
+    // Задання запиту до WMI -----------------------------------
+
     this->pEnumerator = NULL;
     this->hRes = pSvc->ExecQuery(
         BSTR(L"WQL"),
@@ -136,21 +141,24 @@ BOOL BiosInfo::GetTestData()
     {
         this->errorCode = HRESULT_CODE(this->hRes);
 
-        this->output = L"Query for operating system name failed.";
-        wsprintfW(this->errBuff, L"Erroe code: 0x%X\n", errorCode);
+        this->output = L"Запит завершився невдало.";
+        wsprintfW(this->errBuff, L"Код помилки: 0x%X\n", errorCode);
         this->output += this->errBuff;
         pSvc->Release();
         pLoc->Release();
         CoUninitialize();
-        return FALSE;
+        return FALSE;               // Program has failed.
     }
+
+    // Крок 7: -------------------------------------------------
+    // Отримання даних із запиту на кроці 6 --------------------
 
     IWbemClassObject* pclsObj = NULL;
     ULONG uReturn = 0;
 
     while (pEnumerator)
     {
-        HRESULT hr = pEnumerator->Next(WBEM_INFINITE, 1,
+        this->hRes = pEnumerator->Next(WBEM_INFINITE, 1,
             &pclsObj, &uReturn);
 
         if (0 == uReturn)
@@ -161,16 +169,36 @@ BOOL BiosInfo::GetTestData()
         VARIANT vtProp;
 
         VariantInit(&vtProp);
+        // Get the value of the Bios Characteristics property
+        this->hRes = pclsObj->Get(L"BiosCharacteristics", 0, &vtProp, 0, 0);
+        this->output = L"Bios Characteristics : ";
+        this->hRes = SafeArrayLock(vtProp.parray);
+        if (SUCCEEDED(this->hRes))
+        {
+            // Отримання вказівника на характеристики
+            pCharactDat = static_cast<UINT32*>(vtProp.parray->pvData);
 
-        hr = pclsObj->Get(L"Manufacturer", 0, &vtProp, 0, 0);
-        this->output = L" Bios Manufacturer : ";
-        this->output += vtProp.bstrVal;
+            // Вилучення отриманих характеристик у рядок
+            long lowerBound, upperBound;
+            SafeArrayGetLBound(vtProp.parray, 1, &lowerBound);
+            SafeArrayGetUBound(vtProp.parray, 1, &upperBound);
+
+            // Кількість отриманих характеристик
+            long numOfCharact = upperBound - lowerBound + 1;
+
+            for (int i = 0; i < numOfCharact; ++i)
+            {
+                this->output += std::to_wstring(pCharactDat[i]);
+                this->output += ' ';
+            }
+        }
+        SafeArrayUnlock(vtProp.parray);
         this->output += '\n';
         VariantClear(&vtProp);
 
         pclsObj->Release();
+        return TRUE;
     }
-    return TRUE;
 }
 
 std::wstring BiosInfo::GetOutput()
@@ -178,11 +206,18 @@ std::wstring BiosInfo::GetOutput()
     return this->output;
 }
 
-String^ BiosInfoOutput::GetOutput()
+String^ BiosInfoOutput::ConnectToWMI()
 {
-    BiosInfo bInf;
     Boolean isConnected = bInf.ConnectToWMI();
-    Boolean isGot = bInf.GetTestData();
+    std::wstring res = bInf.GetOutput();
+    String^ CLIOutput = marshal_as<String^>(res);
+
+    return CLIOutput;
+}
+
+String^ BiosInfoOutput::GetBiosCharacteristics()
+{
+    Boolean isGot = bInf.GetBiosCharacteristics();
     std::wstring res = bInf.GetOutput();
 
     // Перетворення std::wstring на System::String
