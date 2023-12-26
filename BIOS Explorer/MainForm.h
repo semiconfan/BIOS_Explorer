@@ -35,8 +35,8 @@ namespace BIOSExplorer {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ PrimaryBIOS_tb;
+
+
 	private: System::Windows::Forms::TextBox^ ReleaseDate_tb;
 
 
@@ -74,8 +74,6 @@ namespace BIOSExplorer {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->PrimaryBIOS_tb = (gcnew System::Windows::Forms::TextBox());
 			this->ReleaseDate_tb = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->SMBIOSPresent_tb = (gcnew System::Windows::Forms::TextBox());
@@ -91,26 +89,9 @@ namespace BIOSExplorer {
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(12, 68);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(75, 13);
-			this->label1->TabIndex = 0;
-			this->label1->Text = L"Primary BIOS :";
-			// 
-			// PrimaryBIOS_tb
-			// 
-			this->PrimaryBIOS_tb->Location = System::Drawing::Point(128, 65);
-			this->PrimaryBIOS_tb->Name = L"PrimaryBIOS_tb";
-			this->PrimaryBIOS_tb->ReadOnly = true;
-			this->PrimaryBIOS_tb->Size = System::Drawing::Size(105, 20);
-			this->PrimaryBIOS_tb->TabIndex = 1;
-			// 
 			// ReleaseDate_tb
 			// 
-			this->ReleaseDate_tb->Location = System::Drawing::Point(341, 65);
+			this->ReleaseDate_tb->Location = System::Drawing::Point(341, 37);
 			this->ReleaseDate_tb->Name = L"ReleaseDate_tb";
 			this->ReleaseDate_tb->ReadOnly = true;
 			this->ReleaseDate_tb->Size = System::Drawing::Size(131, 20);
@@ -119,7 +100,7 @@ namespace BIOSExplorer {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(259, 68);
+			this->label2->Location = System::Drawing::Point(259, 40);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(78, 13);
 			this->label2->TabIndex = 2;
@@ -127,7 +108,7 @@ namespace BIOSExplorer {
 			// 
 			// SMBIOSPresent_tb
 			// 
-			this->SMBIOSPresent_tb->Location = System::Drawing::Point(128, 13);
+			this->SMBIOSPresent_tb->Location = System::Drawing::Point(128, 37);
 			this->SMBIOSPresent_tb->Name = L"SMBIOSPresent_tb";
 			this->SMBIOSPresent_tb->ReadOnly = true;
 			this->SMBIOSPresent_tb->Size = System::Drawing::Size(105, 20);
@@ -136,7 +117,7 @@ namespace BIOSExplorer {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(3, 16);
+			this->label3->Location = System::Drawing::Point(12, 40);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(93, 13);
 			this->label3->TabIndex = 4;
@@ -144,7 +125,7 @@ namespace BIOSExplorer {
 			// 
 			// Status_tb
 			// 
-			this->Status_tb->Location = System::Drawing::Point(128, 39);
+			this->Status_tb->Location = System::Drawing::Point(128, 11);
 			this->Status_tb->Name = L"Status_tb";
 			this->Status_tb->ReadOnly = true;
 			this->Status_tb->Size = System::Drawing::Size(105, 20);
@@ -153,7 +134,7 @@ namespace BIOSExplorer {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(12, 42);
+			this->label4->Location = System::Drawing::Point(12, 14);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(43, 13);
 			this->label4->TabIndex = 6;
@@ -161,7 +142,7 @@ namespace BIOSExplorer {
 			// 
 			// BIOSVersion_tb
 			// 
-			this->BIOSVersion_tb->Location = System::Drawing::Point(128, 91);
+			this->BIOSVersion_tb->Location = System::Drawing::Point(128, 63);
 			this->BIOSVersion_tb->Name = L"BIOSVersion_tb";
 			this->BIOSVersion_tb->ReadOnly = true;
 			this->BIOSVersion_tb->Size = System::Drawing::Size(344, 20);
@@ -170,7 +151,7 @@ namespace BIOSExplorer {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(12, 94);
+			this->label5->Location = System::Drawing::Point(12, 66);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(76, 13);
 			this->label5->TabIndex = 8;
@@ -178,7 +159,7 @@ namespace BIOSExplorer {
 			// 
 			// richBiosCharacteristics
 			// 
-			this->richBiosCharacteristics->Location = System::Drawing::Point(128, 117);
+			this->richBiosCharacteristics->Location = System::Drawing::Point(128, 89);
 			this->richBiosCharacteristics->Name = L"richBiosCharacteristics";
 			this->richBiosCharacteristics->ReadOnly = true;
 			this->richBiosCharacteristics->Size = System::Drawing::Size(344, 215);
@@ -188,7 +169,7 @@ namespace BIOSExplorer {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(12, 120);
+			this->label6->Location = System::Drawing::Point(12, 92);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(110, 13);
 			this->label6->TabIndex = 11;
@@ -196,7 +177,7 @@ namespace BIOSExplorer {
 			// 
 			// Exit_Btn
 			// 
-			this->Exit_Btn->Location = System::Drawing::Point(15, 309);
+			this->Exit_Btn->Location = System::Drawing::Point(15, 281);
 			this->Exit_Btn->Name = L"Exit_Btn";
 			this->Exit_Btn->Size = System::Drawing::Size(107, 23);
 			this->Exit_Btn->TabIndex = 12;
@@ -206,7 +187,7 @@ namespace BIOSExplorer {
 			// 
 			// SMBIOSVersion_tb
 			// 
-			this->SMBIOSVersion_tb->Location = System::Drawing::Point(341, 39);
+			this->SMBIOSVersion_tb->Location = System::Drawing::Point(341, 11);
 			this->SMBIOSVersion_tb->Name = L"SMBIOSVersion_tb";
 			this->SMBIOSVersion_tb->ReadOnly = true;
 			this->SMBIOSVersion_tb->Size = System::Drawing::Size(131, 20);
@@ -215,7 +196,7 @@ namespace BIOSExplorer {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(245, 42);
+			this->label7->Location = System::Drawing::Point(245, 14);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(92, 13);
 			this->label7->TabIndex = 14;
@@ -225,7 +206,7 @@ namespace BIOSExplorer {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(484, 339);
+			this->ClientSize = System::Drawing::Size(484, 311);
 			this->Controls->Add(this->SMBIOSVersion_tb);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->Exit_Btn);
@@ -239,8 +220,6 @@ namespace BIOSExplorer {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->ReleaseDate_tb);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->PrimaryBIOS_tb);
-			this->Controls->Add(this->label1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
@@ -267,7 +246,13 @@ namespace BIOSExplorer {
 			MessageBox::Show(bInfOut.GetResult(), L"Підключення",
 				MessageBoxButtons::OK, MessageBoxIcon::Information);
 
+			bInfOut.GetBiosInfo();
 			this->richBiosCharacteristics->AppendText(bInfOut.GetBiosCharacteristics());
+			this->BIOSVersion_tb->AppendText(bInfOut.GetBiosVersion());
+			this->SMBIOSPresent_tb->AppendText(bInfOut.GetSMBIOSPresent());
+			this->SMBIOSVersion_tb->AppendText(bInfOut.GetSMBIOSVersion());
+			this->Status_tb->AppendText(bInfOut.GetBiosStatus());
+			this->ReleaseDate_tb->AppendText(bInfOut.GetBiosReleaseDate());
 		}
 
 		private: System::Void Exit_Btn_Click(System::Object^ sender, System::EventArgs^ e) {

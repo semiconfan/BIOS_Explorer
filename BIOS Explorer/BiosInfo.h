@@ -72,7 +72,14 @@ private:
 
 public:
     Boolean ConnectToWMI();
+    Boolean GetBiosInfo();
     String^ GetBiosCharacteristics();
+    String^ GetBiosCaption();
+    String^ GetBiosVersion();
+    String^ GetBiosStatus();
+    String^ GetBiosReleaseDate();
+    String^ GetSMBIOSPresent();
+    String^ GetSMBIOSVersion();
 
     // Гетер поля result
     String^ GetResult();
