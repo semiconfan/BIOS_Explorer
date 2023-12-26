@@ -44,29 +44,38 @@ private:
     wchar_t errBuff[256]{};             // Буфер для зберігання коду помилки
 
     // Рядок, який потрібен для зберігання результатів запитів до WMI (С++ формат)
-    std::wstring output;
+    std::wstring result;
 
     // Інформація про BIOS:
     std::wstring caption;               // Опис
     std::wstring biosVersion;           // Версія
-    std::wstring manufacturer;          // Виробник
+    std::wstring status;                // Стан
     std::wstring releaseDate;           // Дата випуску
-    std::wstring SMBIOSVersion;         // Інформація про SMBIOS версію
+    std::wstring SMBIOSPresent;         // Перевірка доступності SMBIOS
+    std::wstring SMBIOSVersion;         // Інформація про SMBIOS версію 
+    UINT32* pCharactDat;                // Масив характеристик
+    long numOfCharact;                  // Кількість отриманих характеристик
 
-    // Змінні, які потрібні для зберігання результатів запитів до WMI
-    UINT32* pCharactDat;                // Масив характеристик BIOS
 
     // Методи для взаємодії з WMI
     BOOL ConnectToWMI();
-    BOOL GetBiosCharacteristics();
+    BOOL GetBiosInfo();
     std::wstring GetOutput();
+    std::wstring WMIDateStringToDate(const std::wstring& wmiDate);
 };
 
 ref class BiosInfoOutput
 {
+private:
+    // Рядок, який потрібен для зберігання результатів запитів до WMI (.NET формат)
+    String^ result;
+
 public:
-    String^ ConnectToWMI();
+    Boolean ConnectToWMI();
     String^ GetBiosCharacteristics();
+
+    // Гетер поля result
+    String^ GetResult();
 };
 
 #endif // BIOSINFO_H
