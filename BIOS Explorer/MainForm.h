@@ -254,6 +254,9 @@ namespace BIOSExplorer {
 			else {
 				MessageBox::Show(bInfOut.GetResult(), L"Помилка",
 					MessageBoxButtons::OK, MessageBoxIcon::Error);
+
+				// Завершення програми, вказуючи на помилку
+				Environment::Exit(1);
 			}
 		}
 
