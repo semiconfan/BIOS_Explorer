@@ -243,16 +243,18 @@ namespace BIOSExplorer {
 				Environment::Exit(1);
 			}
 
-			MessageBox::Show(bInfOut.GetResult(), L"Підключення",
-				MessageBoxButtons::OK, MessageBoxIcon::Information);
-
-			bInfOut.GetBiosInfo();
-			this->richBiosCharacteristics->AppendText(bInfOut.GetBiosCharacteristics());
-			this->BIOSVersion_tb->AppendText(bInfOut.GetBiosVersion());
-			this->SMBIOSPresent_tb->AppendText(bInfOut.GetSMBIOSPresent());
-			this->SMBIOSVersion_tb->AppendText(bInfOut.GetSMBIOSVersion());
-			this->Status_tb->AppendText(bInfOut.GetBiosStatus());
-			this->ReleaseDate_tb->AppendText(bInfOut.GetBiosReleaseDate());
+			if (bInfOut.GetBiosInfo()) {
+				this->richBiosCharacteristics->AppendText(bInfOut.GetBiosCharacteristics());
+				this->BIOSVersion_tb->AppendText(bInfOut.GetBiosVersion());
+				this->SMBIOSPresent_tb->AppendText(bInfOut.GetSMBIOSPresent());
+				this->SMBIOSVersion_tb->AppendText(bInfOut.GetSMBIOSVersion());
+				this->Status_tb->AppendText(bInfOut.GetBiosStatus());
+				this->ReleaseDate_tb->AppendText(bInfOut.GetBiosReleaseDate());
+			}
+			else {
+				MessageBox::Show(bInfOut.GetResult(), L"Помилка",
+					MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
 		}
 
 		private: System::Void Exit_Btn_Click(System::Object^ sender, System::EventArgs^ e) {
