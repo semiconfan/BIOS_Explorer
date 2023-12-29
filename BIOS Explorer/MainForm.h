@@ -243,6 +243,10 @@ namespace BIOSExplorer {
 				Environment::Exit(1);
 			}
 
+			// Повідомлення про успішне підключення до WMI
+			MessageBox::Show(bInfOut.GetResult(), L"Підключення",
+				MessageBoxButtons::OK, MessageBoxIcon::Information);
+
 			if (bInfOut.GetBiosInfo()) {
 				this->richBiosCharacteristics->AppendText(bInfOut.GetBiosCharacteristics());
 				this->BIOSVersion_tb->AppendText(bInfOut.GetBiosVersion());
