@@ -150,6 +150,8 @@ BOOL BiosInfo::ConnectToWMI()
 
 BOOL BiosInfo::GetBiosInfo()
 {
+    BOOL success = FALSE;
+
     // Крок 6: -------------------------------------------------
     // Задання запиту до WMI -----------------------------------
 
@@ -171,7 +173,7 @@ BOOL BiosInfo::GetBiosInfo()
         pSvc->Release();
         pLoc->Release();
         CoUninitialize();
-        return FALSE;               // Програма завершилася невдало.
+        return success;                 // Програма завершилася невдало.
     }
 
     // Крок 7: -------------------------------------------------
@@ -258,18 +260,20 @@ BOOL BiosInfo::GetBiosInfo()
             SafeArrayGetUBound(vtProp.parray, 1, &upperBound);
             this->numOfCharact = upperBound - lowerBound + 1;
         }
-        SafeArrayUnlock(vtProp.parray);
+        //SafeArrayUnlock(vtProp.parray);
         VariantClear(&vtProp);
 
+        // Повернення TRUE, якщо хоче б один об'єкт було
+        // успішно оброблено
+        success = TRUE;
         pclsObj->Release();
-
-        // Звільнення ресурсів
-        this->pSvc->Release();
-        this->pLoc->Release();
-        this->pEnumerator->Release();
-        CoUninitialize();
-        return TRUE;
     }
+    // Звільнення ресурсів
+    this->pSvc->Release();
+    this->pLoc->Release();
+    this->pEnumerator->Release();
+    CoUninitialize();
+    return success;
 }
 
 std::wstring BiosInfo::GetOutput()
