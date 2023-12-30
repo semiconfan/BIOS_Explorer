@@ -254,7 +254,7 @@ BOOL BiosInfo::GetBiosInfo()
             // Отримання вказівника на характеристики
             this->pCharactDat = static_cast<UINT32*>(vtProp.parray->pvData);
 
-            // Вилучення отриманих характеристик у рядок
+            // Вилучення кількості отриманих характеристик
             long lowerBound, upperBound;
             SafeArrayGetLBound(vtProp.parray, 1, &lowerBound);
             SafeArrayGetUBound(vtProp.parray, 1, &upperBound);
